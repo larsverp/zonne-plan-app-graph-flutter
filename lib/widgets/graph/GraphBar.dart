@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 class GraphBar extends StatelessWidget {
   int hour;
-  int barHeight = 15 + Random().nextInt(100);
+  int barHeight;
 
   int timeMachine;
 
   GraphBar({
     required this.hour,
     required this.timeMachine,
+    required this.barHeight,
   });
 
   @override
