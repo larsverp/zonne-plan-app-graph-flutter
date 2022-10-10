@@ -39,35 +39,22 @@ class Graph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Row(
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      controller: _scrollController,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            width: 80,
+          ..._previousBars,
+          GraphBar(
+            hour: DateTime.now().hour,
+            timeMachine: 0,
+            barHeight: _powerCosts[23],
           ),
-          Container(
-            width: 1,
-            height: 112,
-            color: const Color(0xFFB1B6BE),
-          ),
+          ..._futureBars,
         ],
       ),
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        controller: _scrollController,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ..._previousBars,
-            GraphBar(
-              hour: DateTime.now().hour,
-              timeMachine: 0,
-            ),
-            ..._futureBars,
-          ],
-        ),
-      ),
-    ]);
+    );
   }
 }
