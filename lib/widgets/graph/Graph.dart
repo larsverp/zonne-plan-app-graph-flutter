@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:zonne_plan/widgets/graph/GraphBar.dart';
 
@@ -8,12 +10,21 @@ class Graph extends StatelessWidget {
     initialScrollOffset: 380.0,
     keepScrollOffset: true,
   );
+  final List<int> _powerCosts = [];
 
   Graph() {
+    int _previousGraphHight = 40;
+    for (int i = 0; i < 48; i++) {
+      _previousGraphHight = Random().nextInt(_previousGraphHight + 20) +
+          (_previousGraphHight / 4).toInt();
+      _powerCosts.add(_previousGraphHight);
+    }
+
     for (int i = -23; i < 0; i++) {
       _previousBars.add(GraphBar(
         hour: DateTime.now().add(Duration(hours: i)).hour,
         timeMachine: -1,
+        barHeight: _powerCosts[i + 23],
       ));
     }
 
@@ -21,6 +32,7 @@ class Graph extends StatelessWidget {
       _futureBars.add(GraphBar(
         hour: DateTime.now().add(Duration(hours: i)).hour,
         timeMachine: 1,
+        barHeight: _powerCosts[i + 23],
       ));
     }
   }
